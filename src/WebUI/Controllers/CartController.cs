@@ -11,10 +11,12 @@ namespace WebUI.Controllers
     public class CartController : Controller
     {
 		private ICartService _cartService;
+		private IUnitOfWork _unitOfWork;
 
-		public CartController(ICartService cartService)
+		public CartController(ICartService cartService, IUnitOfWork unitOfWork)
 		{
 			_cartService = cartService;
+			_unitOfWork = unitOfWork;
 		}
 
         // GET: Cart
@@ -23,16 +25,19 @@ namespace WebUI.Controllers
             return View(_cartService.Get());
         }
 
-		//[HttpPost]
-		public ActionResult Add(int productId, string returnUrl)
+		[HttpPost]
+		public RedirectToRouteResult Add(int productId, string returnUrl)
 		{
-			var cart = _cartService.Get();
+			var sale = new CartModel(_cartService, _unitOfWork);
+			sale.Add(productId, 1);
 
-			cart.AddLine(product, 1);
+			return RedirectToAction("Index", new { returnUrl });
+		}
 
-			_cartService.Update(cart);
 
-			return View("Index");
+		public PartialViewResult Summary()
+		{
+			return PartialView(_cartService.Get());
 		}
     }
 }

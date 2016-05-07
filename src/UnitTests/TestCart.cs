@@ -20,7 +20,7 @@ namespace UnitTests
 			cart.AddLine(product2, 3);
 
 			// Asset
-			Assert.AreEqual(100.0m * 2 + 150.5m * 3, cart.GetTotalAmount());
+			Assert.AreEqual(100.0m * 2 + 150.5m * 3, cart.GetTotalAmount());			
 		}
 
 

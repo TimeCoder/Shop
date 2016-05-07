@@ -8,6 +8,7 @@ using Domain.Services;
 using Ninject;
 using WebUI.Services;
 
+
 namespace WebUI.Infrastructure
 {
 	//http://metanit.com/sharp/mvc5/21.2.php
@@ -34,6 +35,7 @@ namespace WebUI.Infrastructure
 		private void AddBindings()
 		{
 			kernel.Bind<ICartService>().To<CartService>();
+			kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
 		}
 	}
 }

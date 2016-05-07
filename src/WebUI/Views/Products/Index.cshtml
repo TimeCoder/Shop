@@ -12,6 +12,8 @@
 <table class="table">
     <tr>
         <th>
+        </th>
+<th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
@@ -22,7 +24,11 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+       <td>
+           <img src="@Url.Content("~/Content/Images/product_stub.png")" />
+       </td>
+        <td>                     
+
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
@@ -39,7 +45,7 @@
             @using (Html.BeginForm("Add", "Cart"))
             {
                 <div>
-                    @Html.HiddenFor(modelItem => item.Id);
+                    @Html.Hidden("productId", item.Id);
                     @Html.Hidden("returnUrl", Request.Url.PathAndQuery);
                     <input type="submit" class="btn btn-success" value="Добавить"/>
                 </div>

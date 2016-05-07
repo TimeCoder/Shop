@@ -10,25 +10,19 @@ namespace Domain
 	{
 		private List<Line> _lines = new List<Line>();
 
-		public IEnumerable<Line> Lines
-		{
-			get
-			{
-				return _lines;
-			}
-		}
+		public IEnumerable<Line> Lines { get { return _lines; }	}
 
-		public void AddLine(int productId, int quantity)
+		public void AddLine(Product product, int quantity)
 		{
 			var existingLine = _lines
-				.Where(line => line.Product.Id == productId)
+				.Where(line => line.Product.Id == product.Id)
 				.FirstOrDefault();
 
 			if (existingLine == null)
 			{
 				_lines.Add(new Line
 				{
-					Product = new Product { Id = productId },
+					Product = product,
 					Quantity = quantity
 				});
 			}

@@ -14,7 +14,7 @@ namespace WebUI.Controllers
 {
     public class ProductsController : Controller
     {
-        private WebUIContext db = new WebUIContext();
+        private ShopContext db = new ShopContext();
 
         // GET: Products
         public async Task<ActionResult> Index()
